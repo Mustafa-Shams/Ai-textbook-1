@@ -1,0 +1,86 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+/* Custom CSS for Sci-Fi/Robotics aesthetic */
+:root {
+  --ifm-color-primary: #2c7ae0;
+  --ifm-color-primary-dark: #256bc7;
+  --ifm-color-primary-darker: #2365bb;
+  --ifm-color-primary-darkest: #1d5399;
+  --ifm-color-primary-light: #4a8ce6;
+  --ifm-color-primary-lighter: #5a97e9;
+  --ifm-color-primary-lightest: #79a9ed;
+  --ifm-code-font-size: 95%;
+}
+
+/* Sci-Fi themed styles */
+.hero--primary {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+/* Robotics-inspired accent colors */
+.docusaurus-highlight-code-line {
+  background-color: rgba(255, 255, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+/* Custom card styles for educational content */
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Sci-fi inspired sidebar */
+.menu {
+  background-color: #f8f9fa;
+}
+
+/* Custom admonitions for educational content */
+.admonition {
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+.admonition--note {
+  border-left-color: #2c7ae0;
+}
+
+.admonition--tip {
+  border-left-color: #4caf50;
+}
+
+.admonition--caution {
+  border-left-color: #ff9800;
+}
+
+.admonition--danger {
+  border-left-color: #f44336;
+}
+
+/* Code block styling for technical content */
+.code-block {
+  position: relative;
+}
+
+.code-block-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+  color: white;
+  border: none;
+}

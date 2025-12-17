@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch --all --prune)",
+      "Bash(mkdir -p website/src/components website/src/pages website/src/css website/docs website/docs/module-1 website/docs/module-2 website/docs/module-3 website/docs/module-4 website/docs/capstone)",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(npm install)",
+      "Bash(npm run build)",
+      "Bash(npx docusaurus serve)",
+      "Bash(git init:*)",
+      "Bash(git add .)",
+      "Bash(git add .claude/ .github/ .gitignore history/ specs/ website/)",
+      "Bash(git commit -m \"feat: initial commit of Physical AI & Humanoid Robotics documentation site\n\n- Set up Docusaurus v3 project with TypeScript\n- Configure GitHub Pages deployment\n- Enable Mermaid diagram support\n- Create complete content structure for all 6 modules\n- Implement auto-generated sidebar navigation\n- Add Sci-Fi/Robotics aesthetic styling\n- Set up GitHub Actions workflow for deployment\n\nThis commit includes the complete foundation for the Physical AI textbook website.\")",
+      "Bash(git rm -r --cached website/build/ website/node_modules/ website/.docusaurus/)",
+      "Bash(git commit -m \"feat: initial commit of Physical AI & Humanoid Robotics documentation site\n\n- Set up Docusaurus v3 project with TypeScript\n- Configure GitHub Pages deployment\n- Enable Mermaid diagram support\n- Create complete content structure for all 6 modules\n- Implement auto-generated sidebar navigation\n- Add Sci-Fi/Robotics aesthetic styling\n- Set up GitHub Actions workflow for deployment\n\nThis commit includes the complete foundation for the Physical AI textbook website.\n\nCo-authored-by: Claude Sonnet 4.5 <noreply@anthropic.com>\")"
+    ]
+  }
+}
