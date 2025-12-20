@@ -1,0 +1,266 @@
+/* AI Powered Card Styles */
+.aiPoweredCard {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.aiPoweredCard:hover {
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  flex: 1;
+}
+
+/* AI Insight Button */
+.aiInsightButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.aiInsightButton:hover {
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.aiInsightButton.loading {
+  padding: 0.75rem 1rem;
+}
+
+.aiIcon {
+  font-size: 1.2rem;
+}
+
+.aiButtonText {
+  font-size: 0.9rem;
+}
+
+.loadingSpinner {
+  font-size: 1.2rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Card Content */
+.cardContent {
+  position: relative;
+  z-index: 2;
+}
+
+/* AI Insight Panel */
+.aiInsightPanel {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #e0f2fe, #ede9fe);
+  border-radius: 12px;
+  border-left: 4px solid #2563eb;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.insightHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.insightHeader h4 {
+  margin: 0;
+  color: #1e40af;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.insightIcon {
+  font-size: 1.5rem;
+}
+
+.insightContent {
+  color: #374151;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.insightActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.insightAction {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #1e40af;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.insightAction:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Variant styles */
+.variant-primary {
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.variant-secondary {
+  background: linear-gradient(135deg, #f0fdfa, #ecfdf5);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.variant-tertiary {
+  background: linear-gradient(135deg, #fef3c7, #fef08a);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Decorative elements */
+.aiPoweredCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent,
+    rgba(37, 99, 235, 0.1),
+    transparent 30%
+  );
+  animation: rotate 6s linear infinite;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.aiPoweredCard:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .aiPoweredCard {
+    padding: 1.5rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cardTitle {
+    margin-bottom: 1rem;
+  }
+
+  .aiInsightButton {
+    align-self: flex-start;
+  }
+
+  .insightActions {
+    flex-direction: column;
+  }
+
+  .insightAction {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Dark mode adjustments */
+html[data-theme='dark'] .aiPoweredCard {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border-color: rgba(96, 165, 250, 0.2);
+  color: #e2e8f0;
+}
+
+html[data-theme='dark'] .cardTitle {
+  color: #f1f5f9;
+}
+
+html[data-theme='dark'] .insightContent {
+  color: #cbd5e1;
+}
+
+html[data-theme='dark'] .aiInsightPanel {
+  background: linear-gradient(135deg, #1e40af, #5b21b6);
+  border-color: #60a5fa;
+}
+
+html[data-theme='dark'] .insightHeader h4 {
+  color: #93c5fd;
+}
+
+html[data-theme='dark'] .insightAction {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #93c5fd;
+}
+
+html[data-theme='dark'] .insightAction:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
