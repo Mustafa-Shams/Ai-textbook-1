@@ -5,9 +5,11 @@ title: "URDF Structures for Humanoid Joints/Links"
 
 # URDF Structures for Humanoid Joints/Links
 
+URDF (Unified Robot Description Format) is a fundamental component in robotics that enables the precise description of robot models in ROS. For humanoid robots, URDF serves as the blueprint that defines the physical structure, kinematic relationships, and visual representation of the robot. This format is essential for both simulation and real-world robot control, as it provides the necessary information for motion planning, collision detection, and visualization.
+
 ## Understanding URDF
 
-URDF (Unified Robot Description Format) is an XML format used to describe robot models in ROS. It defines the physical and visual properties of a robot, including links, joints, and their relationships.
+URDF (Unified Robot Description Format) is an XML format used to describe robot models in ROS. It defines the physical and visual properties of a robot, including links, joints, and their relationships. For humanoid robots, URDF is particularly important as it captures the complex kinematic chains that enable human-like movement patterns.
 
 ## Basic URDF Structure
 
@@ -55,6 +57,8 @@ A humanoid robot typically includes:
 2. **Fixed joints**: For permanent connections
 3. **Continuous joints**: For unlimited rotation (waist)
 4. **Prismatic joints**: For linear movement (if needed)
+
+The URDF description is critical for humanoid robots as it enables accurate forward and inverse kinematics calculations, which are essential for complex movements like walking, reaching, and manipulation tasks.
 
 ## Next Steps
 

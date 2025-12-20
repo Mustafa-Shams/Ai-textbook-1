@@ -5,7 +5,7 @@ title: "Module 1: The Robotic Nervous System (ROS 2)"
 
 # Module 1: The Robotic Nervous System (ROS 2)
 
-This module introduces the Robot Operating System 2 (ROS 2), the communication backbone that enables coordination between different components of a robotic system.
+This module introduces the Robot Operating System 2 (ROS 2), the communication backbone that enables coordination between different components of a robotic system. ROS 2 serves as the nervous system of modern robotics, facilitating seamless communication between sensors, actuators, controllers, and higher-level decision-making algorithms. Understanding ROS 2 is crucial for developing complex robotic systems, particularly humanoid robots that require real-time coordination of multiple subsystems.
 
 ## Core Concepts
 
@@ -14,6 +14,8 @@ ROS 2 provides the infrastructure for:
 - **Topics**: Streams of messages passed between nodes
 - **Services**: Synchronous request/response communication
 - **Actions**: Asynchronous goal-oriented communication
+
+These communication patterns enable the development of modular, distributed robotic applications where different components can be developed and tested independently.
 
 ## Learning Objectives
 

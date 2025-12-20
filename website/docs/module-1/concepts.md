@@ -5,9 +5,11 @@ title: "Core Concepts: Nodes, Topics, Services"
 
 # Core Concepts: Nodes, Topics, Services
 
+ROS 2 communication is built on three fundamental concepts that form the backbone of robotic systems: nodes, topics, and services. Understanding these concepts is essential for developing distributed robotic applications that can scale from simple single-robot systems to complex multi-robot environments.
+
 ## Nodes
 
-In ROS 2, a node is an executable that uses ROS 2 to communicate with other nodes. Nodes are the fundamental building blocks of a ROS 2 system.
+In ROS 2, a node is an executable that uses ROS 2 to communicate with other nodes. Nodes are the fundamental building blocks of a ROS 2 system. Each node typically encapsulates a specific functionality such as sensor processing, motion planning, or control algorithms. Nodes can be written in different programming languages (C++, Python, etc.) and communicate seamlessly through ROS 2's middleware.
 
 ### Creating a Node
 
@@ -33,11 +35,11 @@ if __name__ == '__main__':
 
 ## Topics
 
-Topics enable asynchronous message passing between nodes. Multiple nodes can publish and subscribe to the same topic.
+Topics enable asynchronous message passing between nodes. Multiple nodes can publish and subscribe to the same topic, creating a publish-subscribe pattern that supports one-to-many and many-to-one communication. Topics are ideal for streaming data like sensor readings, robot states, or control commands.
 
 ## Services
 
-Services provide synchronous request/response communication between nodes.
+Services provide synchronous request/response communication between nodes. This pattern is suitable for operations that require immediate responses, such as requesting robot calibration, querying system status, or executing specific actions with guaranteed completion.
 
 ## Next Steps
 

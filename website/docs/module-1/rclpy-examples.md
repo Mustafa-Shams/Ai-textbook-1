@@ -5,6 +5,8 @@ title: "rclpy Implementation Examples"
 
 # rclpy Implementation Examples
 
+This section provides practical implementation examples using rclpy, the Python client library for ROS 2. These examples demonstrate the fundamental patterns of publisher-subscriber communication that form the backbone of robotic systems. Understanding these patterns is crucial for developing real-world robotic applications where multiple components must coordinate seamlessly.
+
 ## Publisher Node
 
 ```python
@@ -68,6 +70,8 @@ def main(args=None):
 if __name__ == '__main__':
     main()
 ```
+
+These examples demonstrate the fundamental publish-subscribe pattern in ROS 2. In real robotic applications, publishers might represent sensor data (camera images, LIDAR scans, IMU readings) while subscribers might represent control systems that react to this data. The publisher-subscriber pattern enables loose coupling between components, allowing for more robust and maintainable robotic systems.
 
 ## Next Steps
 
