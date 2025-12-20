@@ -17,7 +17,10 @@
       "Bash(npx docusaurus build)",
       "Bash(find . -name \"*.html\" -exec grep -l \"/docs/intro\" {} ;)",
       "Bash(npx docusaurus serve --port 3001)",
-      "Bash(npx docusaurus clear)"
+      "Bash(npx docusaurus clear)",
+      "Bash(npm run serve)",
+      "Bash(powershell Get-Content \"C:\\\\Users\\\\kh\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-kh-Desktop-Ai-textbook-1\\\\tasks\\\\bd78c07.output\")",
+      "Bash(powershell Get-Content \"C:\\\\Users\\\\kh\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-kh-Desktop-Ai-textbook-1\\\\tasks\\\\bdb75bf.output\")"
     ]
   }
 }

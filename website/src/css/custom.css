@@ -99,6 +99,14 @@ html[data-theme='dark'] {
   background-clip: text;
 }
 
+/* Dark mode for hero subtitle */
+html[data-theme='dark'] .hero__subtitle {
+  background: linear-gradient(135deg, #cbd5e1, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Interactive animated buttons */
 .button {
   border-radius: 50px;
@@ -157,6 +165,16 @@ html[data-theme='dark'] {
   box-shadow: 0 20px 30px rgba(139, 92, 246, 0.4);
 }
 
+/* Dark mode for buttons */
+html[data-theme='dark'] .button {
+  box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3);
+}
+
+html[data-theme='dark'] .button--secondary {
+  color: var(--ifm-color-primary);
+  border: 2px solid var(--ifm-color-primary);
+}
+
 /* Gradient navbar with interactive elements */
 .navbar {
   background: var(--ifm-navbar-background) !important;
@@ -180,6 +198,29 @@ html[data-theme='dark'] {
 
 .navbar__items {
   color: #1e293b;
+}
+
+/* Subtle dark mode toggle button enhancement */
+.navbar__toggle {
+  transition: all 0.3s ease;
+}
+
+.navbar__toggle svg {
+  transition: all 0.3s ease;
+}
+
+/* Dark mode specific styling for better visibility */
+html[data-theme='dark'] .navbar__toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+html[data-theme='dark'] .navbar__toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+html[data-theme='dark'] .navbar__toggle svg {
+  filter: brightness(1.5);
 }
 
 /* Interactive sidebar with gradient hover effects */
@@ -633,6 +674,68 @@ html {
   border-right: 1px solid rgba(139, 92, 246, 0.1);
 }
 
+/* Dark mode for sidebar */
+html[data-theme='dark'] .sidebar {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border-right: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+html[data-theme='dark'] .menu {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+html[data-theme='dark'] .menu__link {
+  color: #e2e8f0;
+}
+
+html[data-theme='dark'] .menu__link:hover {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(240, 171, 252, 0.1));
+  color: var(--ifm-color-primary);
+}
+
+html[data-theme='dark'] .menu__link--active {
+  background: linear-gradient(135deg, #312e81, #5b21b6);
+  color: var(--ifm-color-primary);
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+/* Enhanced interactive pagination */
+.pagination-nav {
+  margin: 3.5rem 0;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-top: 2px solid rgba(139, 92, 246, 0.2);
+  border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+}
+
+.pagination-nav__sublabel {
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pagination-nav__label {
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+/* Dark mode for pagination */
+html[data-theme='dark'] .pagination-nav {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border-top: 2px solid rgba(167, 139, 250, 0.2);
+  border-bottom: 2px solid rgba(167, 139, 250, 0.2);
+}
+
+html[data-theme='dark'] .pagination-nav__sublabel {
+  color: #94a3b8;
+}
+
+html[data-theme='dark'] .pagination-nav__label {
+  color: var(--ifm-color-primary);
+}
+
 /* Interactive scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
@@ -650,4 +753,17 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, var(--ifm-color-primary-dark), var(--ifm-color-secondary));
+}
+
+/* Dark mode for scrollbars */
+html[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+html[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+}
+
+html[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--ifm-color-primary-light), var(--ifm-color-secondary));
 }
