@@ -1,8 +1,83 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: 4rem 0;
   width: 100%;
+  background: linear-gradient(135deg, #f0f9ff, #f5f3ff, #fdf2f8);
+}
+
+.featureCard {
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.featureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  transition: left 0.8s;
+  z-index: 0;
+}
+
+.featureCard:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(139, 92, 246, 0.25);
+}
+
+.featureCard:hover::before {
+  left: 100%;
+}
+
+.featureTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.featureDescription {
+  font-size: 1rem;
+  color: #475569;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark mode support */
+html[data-theme='dark'] .featureCard {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+html[data-theme='dark'] .featureTitle {
+  background: linear-gradient(135deg, #a78bfa, #f0abfc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+html[data-theme='dark'] .featureDescription {
+  color: #cbd5e1;
+}
+
+html[data-theme='dark'] .featureCard:hover {
+  box-shadow: 0 25px 50px rgba(139, 92, 246, 0.4);
 }
 
 .featureSvg {

@@ -4,20 +4,108 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #f0f9ff, #f5f3ff, #fdf2f8) !important;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 20%);
+  pointer-events: none;
+}
+
+.hero__title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #475569;
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  line-height: 1.7;
+  background: linear-gradient(135deg, #475569, #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+/* Dark mode support for hero section */
+html[data-theme='dark'] .heroBanner {
+  background: linear-gradient(135deg, #1e293b, #334155, #4c1d95) !important;
+}
+
+html[data-theme='dark'] .heroBanner::before {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(167, 139, 250, 0.15) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(240, 171, 252, 0.15) 0%, transparent 20%);
+}
+
+html[data-theme='dark'] .hero__title {
+  background: linear-gradient(135deg, #a78bfa, #f0abfc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme='dark'] .hero__subtitle {
+  background: linear-gradient(135deg, #cbd5e1, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 4rem 2rem;
+  }
+
+  .hero__title {
+    font-size: 2.5rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

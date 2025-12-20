@@ -15,7 +15,9 @@
       "Bash(git rm -r --cached website/build/ website/node_modules/ website/.docusaurus/)",
       "Bash(git commit -m \"feat: initial commit of Physical AI & Humanoid Robotics documentation site\n\n- Set up Docusaurus v3 project with TypeScript\n- Configure GitHub Pages deployment\n- Enable Mermaid diagram support\n- Create complete content structure for all 6 modules\n- Implement auto-generated sidebar navigation\n- Add Sci-Fi/Robotics aesthetic styling\n- Set up GitHub Actions workflow for deployment\n\nThis commit includes the complete foundation for the Physical AI textbook website.\n\nCo-authored-by: Claude Sonnet 4.5 <noreply@anthropic.com>\")",
       "Bash(npx docusaurus build)",
-      "Bash(find . -name \"*.html\" -exec grep -l \"/docs/intro\" {} ;)"
+      "Bash(find . -name \"*.html\" -exec grep -l \"/docs/intro\" {} ;)",
+      "Bash(npx docusaurus serve --port 3001)",
+      "Bash(npx docusaurus clear)"
     ]
   }
 }
