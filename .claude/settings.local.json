@@ -64,7 +64,12 @@
       "Bash(findstr :8000)",
       "Bash(taskkill /PID 9252 /F)",
       "Bash(powershell -Command \"Stop-Process -Id 9252 -Force\")",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Skill(sp.phr)",
+      "Bash(dir backend /s)",
+      "Bash(dir /s)",
+      "Bash(dir)",
+      "Bash(dir backend)"
     ]
   }
 }
