@@ -87,7 +87,7 @@ if settings.GITHUB_PAGES_URL and settings.GITHUB_PAGES_URL not in cors_origins:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
-    allow_credentials=True,
+    allow_credentials=False,  # Temporarily disable credentials to avoid issues
     allow_methods=["*"],
     allow_headers=["*"],
     # Expose headers that browsers can read
@@ -110,6 +110,12 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
 
+
+@app.options("/chat")
+async def chat_options():
+    """Handle preflight OPTIONS requests for the chat endpoint"""
+    from fastapi.responses import Response
+    return Response(status_code=200)
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
