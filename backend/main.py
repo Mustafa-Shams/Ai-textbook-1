@@ -70,10 +70,23 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Add CORS middleware to allow requests from localhost:3000, 3001, 3002, 3003, 3004 (Docusaurus)
+# Add CORS middleware to allow requests from localhost (for development) and configured origins (for production)
+cors_origins = [
+    "http://localhost:3000", "http://127.0.0.1:3000",
+    "http://localhost:3001", "http://127.0.0.1:3001",
+    "http://localhost:3002", "http://127.0.0.1:3002",
+    "http://localhost:3003", "http://127.0.0.1:3003",
+    "http://localhost:3004", "http://127.0.0.1:3004",
+    "https://ai-textbook-1-production.up.railway.app"  # Allow requests from the same Railway domain
+]
+
+# Add GitHub Pages URL from environment variable if available
+if settings.GITHUB_PAGES_URL:
+    cors_origins.append(settings.GITHUB_PAGES_URL)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:3001", "http://127.0.0.1:3001", "http://localhost:3002", "http://127.0.0.1:3002", "http://localhost:3003", "http://127.0.0.1:3003", "http://localhost:3004", "http://127.0.0.1:3004"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

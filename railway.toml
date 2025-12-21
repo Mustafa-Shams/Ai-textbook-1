@@ -18,3 +18,4 @@ startCommand = "cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $
 # Default values that will be overridden by Railway environment variables
 QDRANT_URL = "https://17dee34e-ac04-40e3-8445-374d1a8e55ca.eu-west-2-0.aws.cloud.qdrant.io"
 QDRANT_COLLECTION_NAME = "physical_ai_book"
+GITHUB_PAGES_URL = "https://mustafa-shams.github.io/Ai-textbook-1/"

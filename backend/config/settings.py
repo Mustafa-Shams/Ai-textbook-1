@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     # Rate Limiting
     RATE_LIMIT: str = os.getenv("RATE_LIMIT", "10/minute")
 
+    # GitHub Pages Configuration
+    GITHUB_PAGES_URL: str = os.getenv("GITHUB_PAGES_URL", "")
+
     # Logging
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
 
