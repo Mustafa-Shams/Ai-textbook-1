@@ -77,12 +77,11 @@ cors_origins = [
     "http://localhost:3002", "http://127.0.0.1:3002",
     "http://localhost:3003", "http://127.0.0.1:3003",
     "http://localhost:3004", "http://127.0.0.1:3004",
-    "https://mustafa-shams.github.io/Ai-textbook-1/",
-    "https://ai-textbook-1-production.up.railway.app"  # Allow requests from the same Railway domain
+    "https://mustafa-shams.github.io/Ai-textbook-1/"  # Your GitHub Pages URL
 ]
 
-# Add GitHub Pages URL from environment variable if available
-if settings.GITHUB_PAGES_URL:
+# Add GitHub Pages URL from environment variable if available (to avoid duplication)
+if settings.GITHUB_PAGES_URL and settings.GITHUB_PAGES_URL not in cors_origins:
     cors_origins.append(settings.GITHUB_PAGES_URL)
 
 app.add_middleware(
