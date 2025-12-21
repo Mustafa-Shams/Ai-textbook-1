@@ -12,7 +12,7 @@ import asyncpg
 
 # Import the services and models we'll need
 from services.rag_service import RAGService
-from services.embedding_service import EmbeddingService
+from services.lightweight_embedding_service import EmbeddingService
 from services.llm_service import LLMService
 from config.settings import settings
 
