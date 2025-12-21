@@ -72,7 +72,11 @@
       "Bash(dir backend)",
       "Bash(timeout 10 ping -n 1 127.0.0.)",
       "Bash(powershell Get-Content \"C:\\\\Users\\\\kh\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-kh-Desktop-Ai-textbook-1\\\\tasks\\\\bb954f8.output\")",
-      "Bash(python test_cors_fix.py)"
+      "Bash(python test_cors_fix.py)",
+      "Bash(dir \"C:\\\\Users\\\\kh\\\\Desktop\\\\Ai-textbook-1\\\\website\\\\docs\" /s)",
+      "Bash(powershell \"Get-ChildItem -Path ''C:\\\\Users\\\\kh\\\\Desktop\\\\Ai-textbook-1\\\\website\\\\docs'' -Recurse -Name\")",
+      "Bash(python -c \"\nimport asyncio\nfrom ingest import DocumentIngestor\nfrom pathlib import Path\n\nasync def run_ingestion\\(\\):\n    print\\(''Starting document ingestion from website/docs directory...''\\)\n    print\\(''Looking for markdown files in website/docs and subdirectories...''\\)\n    \n    # First, let''s see what files we can find\n    docs_path = Path\\(''../website/docs''\\).resolve\\(\\)\n    print\\(f''Docs directory exists: {docs_path}''\\)\n    # Count markdown files\n    md_files = list\\(docs_path.rglob\\(''*.md''\\)\\)\n    print\\(f''Found {len\\(md_files\\)} markdown files:''\\)\n    for f in md_files[:10]:  # Show first 10\n        print\\(f''  - {f}''\\)\n    if len\\(md_files\\) > 10:\n        print\\(f''  ... and {len\\(md_files\\) - 10} more files''\\)\n    \n    ingestor = DocumentIngestor\\(\\)\n    total_chunks = await ingestor.ingest_directory\\(docs_path\\)\n    print\\(f''\\\\nSUCCESS: Ingested {total_chunks} chunks from documentation files''\\)\n\nasyncio.run\\(run_ingestion\\(\\)\\)\n\")",
+      "Bash(python test_rag.py)"
     ]
   }
 }
