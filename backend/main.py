@@ -77,12 +77,18 @@ cors_origins = [
     "http://localhost:3002", "http://127.0.0.1:3002",
     "http://localhost:3003", "http://127.0.0.1:3003",
     "http://localhost:3004", "http://127.0.0.1:3004",
-    "https://mustafa-shams.github.io/Ai-textbook-1/"  # Your GitHub Pages URL
+    "https://mustafa-shams.github.io/Ai-textbook-1/",  # Your GitHub Pages URL with trailing slash
+    "https://mustafa-shams.github.io"  # Also allow the root domain without path
 ]
 
 # Add GitHub Pages URL from environment variable if available (to avoid duplication)
 if settings.GITHUB_PAGES_URL and settings.GITHUB_PAGES_URL not in cors_origins:
     cors_origins.append(settings.GITHUB_PAGES_URL)
+    # Also add the URL without trailing slash if it has one, for flexibility
+    if settings.GITHUB_PAGES_URL.endswith('/'):
+        url_without_slash = settings.GITHUB_PAGES_URL.rstrip('/')
+        if url_without_slash not in cors_origins:
+            cors_origins.append(url_without_slash)
 
 app.add_middleware(
     CORSMiddleware,
@@ -111,11 +117,6 @@ async def health_check():
     return {"status": "healthy"}
 
 
-@app.options("/chat")
-async def chat_options():
-    """Handle preflight OPTIONS requests for the chat endpoint"""
-    from fastapi.responses import Response
-    return Response(status_code=200)
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
