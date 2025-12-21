@@ -14,7 +14,7 @@ from typing import List, Dict
 import re
 
 # Import our services
-from services.embedding_service import EmbeddingService
+from services.lightweight_embedding_service import EmbeddingService
 from services.rag_service import RAGService
 from config.settings import settings
 
