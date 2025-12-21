@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import AIPoweredUIPlugin from '../components/AIPoweredUIPlugin';
+import ChatWidget from '../components/ChatWidget';
 
 const LayoutEnhancer = ({ children }) => {
   useEffect(() => {
@@ -74,6 +75,7 @@ const LayoutEnhancer = ({ children }) => {
     <>
       {children}
       <AIPoweredUIPlugin />
+      <ChatWidget />
     </>
   );
 };
