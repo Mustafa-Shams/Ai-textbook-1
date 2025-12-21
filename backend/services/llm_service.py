@@ -26,37 +26,49 @@ class LLMService:
         try:
             # Handle greetings and simple queries separately
             query_lower = query.lower().strip()
-            if query_lower in ["hi", "hello", "hey", "greetings", "help", "start"]:
-                greeting_message = """
-                Hello! I'm your AI assistant for the Physical AI and Humanoid Robotics textbook.
-                I can help you understand concepts about ROS 2, navigation systems, digital twins,
-                AI integration, and humanoid robotics. Ask me about specific topics from the textbook
-                or select text on the page to get detailed explanations.
+            if query_lower in ["hi", "hello", "hey", "greetings", "help", "start", "what can you do", "what are you", "who are you", "introduction"]:
+                greeting_message = """Hello! I'm your AI assistant for the Physical AI and Humanoid Robotics textbook. I can help you understand concepts about:
 
-                For example, you can ask:
-                - "What is ROS 2?"
-                - "Explain the Nav2 stack"
-                - "How do humanoid robots maintain balance?"
-                - Or select text on the page and click the 'Ask AI' tooltip to get explanations
-                """
+• **ROS 2**: The communication backbone of modern robotics
+• **Navigation Systems**: Including the Nav2 stack for path planning
+• **Digital Twins**: Simulation and testing environments
+• **AI Integration**: Vision-Language-Action systems
+• **Humanoid Robotics**: Bipedal locomotion and control
+
+You can ask me about specific topics from the textbook or select text on the page to get detailed explanations.
+
+**Example questions:**
+• "What is ROS 2 and why is it important?"
+• "Explain the Nav2 stack for bipedal movement"
+• "How do humanoid robots maintain balance?"
+• "What are the core concepts of ROS 2 communication?"
+
+**To use the highlight feature:** Select text on the page and click the 'Ask AI' tooltip for instant explanations.
+
+I provide accurate, textbook-based information focused on Physical AI and Humanoid Robotics concepts."""
                 return greeting_message.strip()
 
             # Check if this is a highlighted text explanation request
             if "Explain this:" in query:
                 # This is from the highlight feature, use the extracted text as context
                 selected_text = query.replace("Explain this:", "").strip()
-                system_message = """
-                You are an AI assistant for a Physical AI and Humanoid Robotics textbook.
-                Provide a detailed explanation of the following selected text from the textbook:
+                system_message = """You are an expert AI assistant for the Physical AI and Humanoid Robotics textbook. Provide a detailed, structured explanation of the selected text with clear sections.
 
-                {selected_text}
+**Selected Text:**
+{selected_text}
 
-                Explain the concepts clearly, break down complex ideas, and relate them to the broader context of Physical AI and Humanoid Robotics where relevant.
-                """
+**Requirements:**
+1. Provide a comprehensive breakdown of the concepts
+2. Use structured formatting (headings, bullet points, numbered lists)
+3. Explain technical terms in simple language
+4. Connect concepts to broader Physical AI and Humanoid Robotics principles
+5. Include practical applications where relevant
+6. Maintain academic rigor while ensuring accessibility
+7. Focus on robotics applications and context"""
 
                 messages = [
                     {"role": "system", "content": system_message.format(selected_text=selected_text)},
-                    {"role": "user", "content": f"Please explain the following text in detail: {selected_text}"}
+                    {"role": "user", "content": f"Please provide a detailed, structured explanation of this text: {selected_text}"}
                 ]
             else:
                 # Regular query with RAG context
@@ -65,72 +77,112 @@ class LLMService:
                     context_lower = context.lower()
                     query_lower = query.lower()
 
-                    # If context seems relevant, use it; otherwise, provide appropriate response
-                    if any(keyword in context_lower for keyword in query_lower.split() if len(keyword) > 3):
+                    # Enhanced relevance checking with more sophisticated matching
+                    query_keywords = [word for word in query_lower.split() if len(word) > 2]
+                    found_keywords = [kw for kw in query_keywords if kw in context_lower]
+
+                    if len(found_keywords) > 0 or len(query_keywords) == 0:
                         # Context appears to contain relevant information
-                        system_message = """
-                        You are an AI assistant specialized in Physical AI and Humanoid Robotics.
-                        Answer the user's question using ONLY the information provided in the following context.
-                        Do not make up information or use general knowledge.
+                        system_message = """You are an expert AI assistant for the Physical AI and Humanoid Robotics textbook. Provide accurate, detailed responses based ONLY on the provided context.
 
-                        Context from the Physical AI and Humanoid Robotics textbook:
-                        {context}
+**Context from textbook:**
+{context}
 
-                        Instructions:
-                        1. Base your answer strictly on the provided context
-                        2. Quote relevant parts when possible
-                        3. Provide accurate, detailed, and helpful answers specific to robotics
-                        4. When relevant, connect concepts to Physical AI and Humanoid Robotics applications
-                        5. If the context partially answers the question, provide what information is available
-                        """
+**User Question:**
+{query}
 
-                        messages = [
-                            {"role": "system", "content": system_message.format(context=context)},
-                            {"role": "user", "content": query}
-                        ]
-                    else:
-                        # Context exists but doesn't seem to answer the specific question
-                        system_message = """
-                        You are an AI assistant for the Physical AI and Humanoid Robotics textbook.
-                        The retrieved context contains information from the textbook, but may not directly answer the specific question asked.
-                        Use the context to provide the most relevant information possible, and if the context doesn't contain
-                        the specific answer, acknowledge this limitation.
+**Response Guidelines:**
+1. Base your answer strictly on the provided context
+2. Quote relevant passages when possible
+3. Provide structured, well-organized answers
+4. Use clear headings and bullet points for complex topics
+5. Connect concepts to Physical AI and Humanoid Robotics applications
+6. If the context partially answers the question, provide all available information
+7. Maintain academic rigor while ensuring clarity
+8. Use technical terminology appropriately but explain when needed
 
-                        Retrieved context:
-                        {context}
-
-                        User's question: {query}
-
-                        Instructions:
-                        1. If the context contains relevant information, provide it
-                        2. If the context doesn't directly answer the question, explain what information is available
-                        3. Don't make up information not in the context
-                        4. Suggest related topics from the context if applicable
-                        """
+**Response Format:**
+- Start with a clear, direct answer
+- Use structured sections for complex topics
+- End with related concepts if relevant"""
 
                         messages = [
                             {"role": "system", "content": system_message.format(context=context, query=query)},
-                            {"role": "user", "content": f"Please answer the question '{query}' based on the provided context, or explain what relevant information is available if the exact question cannot be answered."}
+                            {"role": "user", "content": f"Please answer this question based on the provided context: {query}"}
+                        ]
+                    else:
+                        # Context exists but doesn't seem to directly answer the specific question
+                        system_message = """You are an AI assistant for the Physical AI and Humanoid Robotics textbook. The retrieved context contains textbook information but may not directly answer the specific question.
+
+**Retrieved Context:**
+{context}
+
+**User Question:**
+{query}
+
+**Instructions:**
+1. If the context contains related information, extract and present it
+2. If the exact question cannot be answered, explain what information is available
+3. Suggest related topics that might be helpful
+4. Acknowledge limitations honestly
+5. Maintain focus on Physical AI and Robotics content
+6. Provide the most relevant information possible from the context
+
+**Response Format:**
+- Acknowledge the specific question
+- Present relevant information from context
+- Suggest where to find more specific information if applicable
+- Keep focus on robotics and AI concepts"""
+
+                        messages = [
+                            {"role": "system", "content": system_message.format(context=context, query=query)},
+                            {"role": "user", "content": f"Please answer: '{query}' based on the provided context. If the exact question cannot be answered, explain what relevant information is available."}
                         ]
                 else:
-                    # No context found, inform the user
-                    return "I couldn't find relevant information in the textbook to answer your question. Please try asking about specific topics from the Physical AI and Humanoid Robotics content."
+                    # No context found, inform the user with helpful suggestions
+                    no_context_response = f"""I couldn't find relevant information in the textbook to answer your specific question about "{query}".
 
-            # Call the LLM
+**To get better results, try asking about:**
+• Specific ROS 2 concepts (nodes, topics, services)
+• Navigation systems (Nav2 stack, path planning)
+• Digital twin technologies
+• AI integration in robotics
+• Humanoid robotics principles
+• Sensor systems and perception
+
+**You can also:**
+• Select text on the page and use the 'Ask AI' feature for instant explanations
+• Ask more specific questions about Physical AI and Humanoid Robotics
+• Try rephrasing your question to include specific technical terms
+
+Would you like to ask about any of these specific topics instead?"""
+                    return no_context_response
+
+            # Call the LLM with enhanced error handling
             response = await self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
                 temperature=0.3,  # Lower temperature for more consistent, factual responses
-                max_tokens=1000,
-                timeout=30.0
+                max_tokens=1200,  # Increased for more detailed responses
+                timeout=45.0,     # Increased timeout for complex queries
+                top_p=0.9,        # Better diversity control
+                frequency_penalty=0.1,  # Reduce repetitive responses
+                presence_penalty=0.1    # Encourage topic diversity
             )
 
             # Extract and return the response
-            return response.choices[0].message.content
+            result = response.choices[0].message.content
+
+            # Post-process the response to ensure quality
+            if not result or result.strip() in [" ", "", "  "]:
+                return "I understand your question about \"{query}\", but I couldn't generate a response based on the available textbook content. Please try rephrasing your question or select specific text to get an explanation."
+
+            return result
 
         except Exception as e:
             logger.error(f"Error generating response from LLM: {e}")
-            raise
+            error_message = f"I encountered an issue while processing your request about \"{query}\". This could be due to:\n\n• Network connectivity issues\n• API service temporarily unavailable\n• Complex query requiring more specific textbook content\n\nPlease try:\n• Rephrasing your question\n• Asking about specific robotics concepts\n• Using the text selection feature for instant explanations"
+            return error_message
 
     async def generate_explanation(self, selected_text: str) -> str:
         """

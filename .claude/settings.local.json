@@ -59,7 +59,12 @@
       "Bash(curl -X POST \"http://localhost:8000/chat\" -H \"Content-Type: application/json\" -d \"{\"\"query\"\":\"\"Explain the Nav2 stack\"\", \"\"selected_text\"\": null, \"\"session_id\"\":\"\"test\"\"}\")",
       "Bash(curl -X POST \"http://localhost:8000/chat\" -H \"Content-Type: application/json\" -d \"{\"\"query\"\":\"\"Tell me about ROS 2 in robotics\"\", \"\"selected_text\"\": null, \"\"session_id\"\":\"\"test\"\"}\")",
       "Bash(python reset_and_reingest.py)",
-      "Bash(curl -X POST \"http://localhost:8000/chat\" -H \"Content-Type: application/json\" -d \"{\"\"query\"\":\"\"Explain the Nav2 stack for bipedal movement\"\", \"\"selected_text\"\": null, \"\"session_id\"\":\"\"test\"\"}\")"
+      "Bash(curl -X POST \"http://localhost:8000/chat\" -H \"Content-Type: application/json\" -d \"{\"\"query\"\":\"\"Explain the Nav2 stack for bipedal movement\"\", \"\"selected_text\"\": null, \"\"session_id\"\":\"\"test\"\"}\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr :8000)",
+      "Bash(taskkill /PID 9252 /F)",
+      "Bash(powershell -Command \"Stop-Process -Id 9252 -Force\")",
+      "Bash(curl:*)"
     ]
   }
 }
