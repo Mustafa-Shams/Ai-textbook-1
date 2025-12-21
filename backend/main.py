@@ -88,10 +88,10 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
     # Expose headers that browsers can read
-    expose_headers=["Content-Length", "Content-Range"],
+    expose_headers=["Content-Length", "Content-Range", "Content-Type"],
 )
 
 # Pydantic models
@@ -109,6 +109,7 @@ class ChatResponse(BaseModel):
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
+
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
