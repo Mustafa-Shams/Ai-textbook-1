@@ -10,7 +10,7 @@ Successfully integrated the RAG (Retrieval-Augmented Generation) chatbot with a 
 - Fixed import issues and compatibility problems
 - Updated embedding model to public model (sentence-transformers/all-MiniLM-L6-v2)
 - Processed 282 document chunks from 14 documentation files
-- Backend server running on http://localhost:8000
+- Backend server running on https://ai-textbook-1-production.up.railway.app
 
 ### 2. **Frontend Chat Widget Development** ✅
 - Created ChatWidget component with circular floating button design
@@ -24,7 +24,7 @@ Successfully integrated the RAG (Retrieval-Augmented Generation) chatbot with a 
 - **Copied ChatWidget files**: Moved ChatWidget.tsx and ChatWidget.css to `website/src/components/`
 - **Integrated into LayoutEnhancer**: Added ChatWidget import and component to `website/src/theme/LayoutEnhancer.tsx`
 - **Proper positioning**: ChatWidget now appears in bottom right corner on all pages
-- **Environment variable support**: Uses BACKEND_URL environment variable or defaults to localhost:8000
+- **Environment variable support**: Uses BACKEND_URL environment variable or defaults to https://ai-textbook-1-production.up.railway.app
 
 ### 4. **Final Design Features**
 - **Circular floating button**: 60px diameter with gradient background

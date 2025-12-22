@@ -26,7 +26,7 @@ allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "http://localho
 ```
 
 ## Current Status
-- ✅ Backend server running on http://localhost:8000
+- ✅ Backend server running on https://ai-textbook-1-production.up.railway.app
 - ✅ Frontend running on http://localhost:3004/Ai-textbook-1/
 - ✅ CORS configuration allows requests from port 3004
 - ✅ API connection should now work properly

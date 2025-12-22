@@ -42,7 +42,7 @@ Successfully integrated the RAG chatbot into the frontend with a modern circular
 - ✅ Fully responsive on mobile devices
 - ✅ All RAG functionality preserved
 - ✅ Text selection tooltip feature maintained
-- ✅ Backend connection working (localhost:8000)
+- ✅ Backend connection working (https://ai-textbook-1-production.up.railway.app)
 
 ## Features Maintained
 - Text selection tooltip (Ask AI when text is highlighted)

@@ -6,7 +6,7 @@ import requests
 import json
 
 def test_api():
-    base_url = "http://localhost:8000"
+    base_url = "https://ai-textbook-1-production.up.railway.app"
 
     # Test health endpoint
     print("Testing health endpoint...")

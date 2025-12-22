@@ -107,12 +107,12 @@ Before starting, ensure you have the following installed:
 ### Testing the Setup
 
 1. **API Health Check**
-   - Visit `http://localhost:8000/health` to verify the backend is running
+   - Visit `https://ai-textbook-1-production.up.railway.app/health` to verify the backend is running
    - Should return `{"status": "healthy"}`
 
 2. **Test Chat Endpoint**
    ```bash
-   curl -X POST http://localhost:8000/chat \
+   curl -X POST https://ai-textbook-1-production.up.railway.app/chat \
      -H "Content-Type: application/json" \
      -d '{"message": "Hello, test message"}'
    ```

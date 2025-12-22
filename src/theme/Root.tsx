@@ -9,7 +9,7 @@ export default function Root({ children }: Props): JSX.Element {
   return (
     <>
       {children}
-      <ChatWidget backendUrl={process.env.BACKEND_URL || 'http://localhost:8000'} />
+      <ChatWidget backendUrl={process.env.BACKEND_URL || 'https://ai-textbook-1-production.up.railway.app'} />
     </>
   );
 }

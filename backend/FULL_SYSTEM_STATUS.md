@@ -21,7 +21,7 @@ The complete RAG (Retrieval-Augmented Generation) system has been successfully c
 - All documents properly embedded and stored in vector database
 
 ### 4. ✅ Backend API Server
-- Started and running on http://0.0.0.0:8000
+- Started and running on https://ai-textbook-1-production.up.railway.app
 - All services properly initialized (embedding, RAG, LLM, database)
 - Health endpoint responding correctly
 
@@ -39,7 +39,7 @@ The complete RAG (Retrieval-Augmented Generation) system has been successfully c
 - **LLM Service**: Working with mistralai/mistral-7b-instruct model
 
 ## Example Usage
-The system is now ready to answer questions about your Physical AI and Humanoid Robotics documentation. Send POST requests to `http://localhost:8000/chat` with a JSON body containing your query.
+The system is now ready to answer questions about your Physical AI and Humanoid Robotics documentation. Send POST requests to `https://ai-textbook-1-production.up.railway.app/chat` with a JSON body containing your query.
 
 ## Next Steps
 The RAG system is fully operational and ready for use. All cloud services are connected and working properly.
