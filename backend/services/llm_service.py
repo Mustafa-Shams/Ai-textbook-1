@@ -3,6 +3,7 @@ import asyncio
 from typing import Optional
 from openai import AsyncOpenAI
 from config.settings import settings
+import random
 
 logger = logging.getLogger(__name__)
 
@@ -10,21 +11,33 @@ class LLMService:
     """
     Service to handle communication with LLM providers via OpenRouter.
     Uses the OpenAI Python client with OpenRouter's API.
+    Falls back to rule-based responses when API is unavailable.
     """
 
     def __init__(self):
-        self.client = AsyncOpenAI(
-            api_key=settings.OPENROUTER_API_KEY,
-            base_url="https://openrouter.ai/api/v1"
-        )
-        self.model = settings.LLM_MODEL
+        # Check if API key is available
+        if settings.OPENROUTER_API_KEY:
+            try:
+                self.client = AsyncOpenAI(
+                    api_key=settings.OPENROUTER_API_KEY,
+                    base_url="https://openrouter.ai/api/v1"
+                )
+                self.model = settings.LLM_MODEL
+                self.api_available = True
+                logger.info("LLM service initialized with OpenRouter API")
+            except Exception as e:
+                logger.warning(f"Could not initialize OpenRouter API: {e}")
+                self.api_available = False
+        else:
+            logger.warning("OpenRouter API key not set, using fallback responses")
+            self.api_available = False
 
     async def generate_response(self, query: str, context: str, session_id: Optional[str] = None) -> str:
         """
         Generate response using the LLM with provided context
         """
         try:
-            # Handle greetings and simple queries separately
+            # Handle greetings and simple queries separately - this should always work
             query_lower = query.lower().strip()
             if query_lower in ["hi", "hello", "hey", "greetings", "help", "start", "what can you do", "what are you", "who are you", "introduction"]:
                 greeting_message = """Hello! I'm your AI assistant for the Physical AI and Humanoid Robotics textbook. I can help you understand concepts about:
@@ -47,6 +60,10 @@ You can ask me about specific topics from the textbook or select text on the pag
 
 I provide accurate, textbook-based information focused on Physical AI and Humanoid Robotics concepts."""
                 return greeting_message.strip()
+
+            # If API is not available, use fallback responses based on context
+            if not self.api_available:
+                return self._generate_fallback_response(query, context)
 
             # Check if this is a highlighted text explanation request
             if "Explain this:" in query:
@@ -181,14 +198,55 @@ Would you like to ask about any of these specific topics instead?"""
 
         except Exception as e:
             logger.error(f"Error generating response from LLM: {e}")
-            error_message = f"I encountered an issue while processing your request about \"{query}\". This could be due to:\n\n• Network connectivity issues\n• API service temporarily unavailable\n• Complex query requiring more specific textbook content\n\nPlease try:\n• Rephrasing your question\n• Asking about specific robotics concepts\n• Using the text selection feature for instant explanations"
-            return error_message
+            # Use fallback response if there's an error
+            return self._generate_fallback_response(query, context)
+
+    def _generate_fallback_response(self, query: str, context: str) -> str:
+        """
+        Generate a fallback response when API is not available
+        """
+        # Handle greetings separately (should always work)
+        query_lower = query.lower().strip()
+        if query_lower in ["hi", "hello", "hey", "greetings"]:
+            return """Hello! I'm your AI assistant for the Physical AI and Humanoid Robotics textbook. I'm currently running in offline mode. I can help you understand concepts about:
+
+• **ROS 2**: The communication backbone of modern robotics
+• **Navigation Systems**: Including the Nav2 stack for path planning
+• **Digital Twins**: Simulation and testing environments
+• **AI Integration**: Vision-Language-Action systems
+• **Humanoid Robotics**: Bipedal locomotion and control
+
+You can ask me about specific topics from the textbook and I'll do my best to provide helpful information based on the available documentation."""
+
+        # If we have context, try to extract relevant information
+        if context and len(context.strip()) > 0:
+            # Simple approach: return context with a note
+            context_preview = context[:500] + "..." if len(context) > 500 else context
+            return f"""I found some relevant information in the textbook:
+
+{context_preview}
+
+This information is from the available documentation. For more detailed explanations, please refer to the specific sections in the textbook."""
+
+        # Default fallback
+        return f"""I'm currently running in offline mode without access to the LLM API.
+For your query '{query}', I recommend:
+
+• Checking the relevant sections in the Physical AI and Humanoid Robotics textbook
+• Looking for information about ROS 2, navigation systems, digital twins, or humanoid robotics
+• Using more specific technical terms in your query if available in the documentation
+
+I'm working to provide the best possible response with the available local documentation."""
 
     async def generate_explanation(self, selected_text: str) -> str:
         """
         Generate an explanation for selected text
         """
         try:
+            # If API is not available, use fallback
+            if not self.api_available:
+                return f"""Selected text explanation (offline mode):\n\n{selected_text}\n\nThis text is from the Physical AI and Humanoid Robotics documentation. For detailed explanations, please refer to the relevant sections in the textbook."""
+
             system_message = """
             You are an AI assistant for a Physical AI and Humanoid Robotics textbook.
             Provide a clear, simplified explanation of the following selected text.
@@ -212,13 +270,18 @@ Would you like to ask about any of these specific topics instead?"""
 
         except Exception as e:
             logger.error(f"Error generating explanation: {e}")
-            raise
+            # Return fallback response
+            return f"""Selected text: {selected_text}\n\nCould not generate detailed explanation due to service unavailability. Please refer to the relevant documentation section for detailed information."""
 
     async def generate_simplified_explanation(self, selected_text: str) -> str:
         """
         Generate a simplified explanation for selected text
         """
         try:
+            # If API is not available, use fallback
+            if not self.api_available:
+                return f"""Simplified explanation (offline mode):\n\nOriginal text: {selected_text}\n\nThis content is from the Physical AI and Humanoid Robotics documentation. The key concept is likely related to robotics, AI, or Physical AI principles."""
+
             system_message = """
             You are an AI assistant for a Physical AI and Humanoid Robotics textbook.
             Provide a simplified explanation of the following text that is easy to understand.
@@ -242,4 +305,5 @@ Would you like to ask about any of these specific topics instead?"""
 
         except Exception as e:
             logger.error(f"Error generating simplified explanation: {e}")
-            raise
+            # Return fallback response
+            return f"""Text to simplify: {selected_text}\n\nCould not generate simplified explanation due to service unavailability. The content appears to be related to Physical AI and Humanoid Robotics concepts."""

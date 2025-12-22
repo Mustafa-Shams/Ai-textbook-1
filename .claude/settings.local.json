@@ -94,7 +94,8 @@
       "Bash(tasklist)",
       "Bash(findstr python)",
       "Bash(taskkill /PID 6420 /F)",
-      "Bash(powershell \"Stop-Process -Name python -Force\")"
+      "Bash(powershell \"Stop-Process -Name python -Force\")",
+      "Bash(powershell \"Get-Content ''C:\\\\Users\\\\kh\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-kh-Desktop-Ai-textbook-1\\\\tasks\\\\b62fe74.output''\")"
     ]
   }
 }
