@@ -11,8 +11,7 @@ from contextlib import asynccontextmanager
 import asyncpg
 
 # Import the services and models we'll need
-from services.rag_service import RAGService
-from services.lightweight_embedding_service import EmbeddingService
+from services.internal_knowledge_service import internal_kb_service
 from services.llm_service import LLMService
 from config.settings import settings
 
@@ -21,19 +20,15 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Global variables to hold service instances
-rag_service = None
-embedding_service = None
 llm_service = None
 db_pool = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialize services on startup and clean up on shutdown"""
-    global rag_service, embedding_service, llm_service, db_pool
+    global llm_service, db_pool
 
     # Initialize services
-    embedding_service = EmbeddingService()
-    rag_service = RAGService(embedding_service)
     llm_service = LLMService()
 
     # Initialize database connection pool
@@ -130,15 +125,20 @@ async def chat_endpoint(request: ChatRequest):
     session_id = request.session_id or str(uuid.uuid4())
 
     try:
-        # Logic: If request.selected_text is present, bypass Vector Search and inject selection directly
+        # Logic: If request.selected_text is present, use it as context
         if request.selected_text:
             context = request.selected_text
             sources = ["selected_text"]
         else:
-            # Logic: Perform Qdrant Similarity Search using the user's query embedded with Qwen
-            search_results = await rag_service.search_similar_content(request.query)
-            context = " ".join([result["content"] for result in search_results])
-            sources = [result["source"] for result in search_results]
+            # Use internal knowledge base to find relevant content
+            search_results = internal_kb_service.search_similar_content(request.query)
+            if search_results:
+                context = " ".join([result["content"] for result in search_results])
+                sources = [result["source"] for result in search_results]
+            else:
+                # If no relevant content found, use all documentation content
+                context = internal_kb_service.get_all_content()[:2000]  # Limit context size
+                sources = ["general"]
 
         # Generate response using LLM
         response = await llm_service.generate_response(
