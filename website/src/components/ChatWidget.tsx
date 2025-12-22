@@ -12,7 +12,7 @@ interface ChatWidgetProps {
   backendUrl?: string;
 }
 
-const ChatWidget: React.FC<ChatWidgetProps> = ({ backendUrl = 'https://ai-textbook-production-d478.up.railway.app' }) => {
+const ChatWidget: React.FC<ChatWidgetProps> = ({ backendUrl = 'https://ai-textbook-1-production.up.railway.app' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
