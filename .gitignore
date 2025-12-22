@@ -232,3 +232,4 @@ lib-cov
 *.db-journal
 *.sqlite-shm
 *.sqlite-wal
+nul
